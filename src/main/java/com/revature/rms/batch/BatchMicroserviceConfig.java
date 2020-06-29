@@ -6,10 +6,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @EnableEurekaClient
 @SpringBootApplication
-public class BatchServiceApplication {
+public class BatchMicroserviceConfig {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BatchServiceApplication.class, args);
+		SpringApplication.run(BatchMicroserviceConfig.class, args);
 	}
 
 }
