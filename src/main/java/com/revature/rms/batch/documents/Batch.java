@@ -1,5 +1,6 @@
 package com.revature.rms.batch.documents;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.revature.rms.core.models.Resource;
 import com.revature.rms.core.models.ResourceMetadata;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,6 +12,17 @@ import java.util.List;
 import java.util.Objects;
 
 @Document
+@JsonPropertyOrder({
+        "id",
+        "name",
+        "curriculum",
+        "startDateTime",
+        "endDateTime",
+        "trainerId",
+        "coTrainerId",
+        "associateIds",
+        "metadata"
+})
 public class Batch extends Resource {
 
     @NotEmpty
@@ -33,6 +45,10 @@ public class Batch extends Resource {
 
     @NotNull
     private Curriculum curriculum;
+
+    public Batch() {
+        super();
+    }
 
     public Batch(@NotEmpty String name, @NotNull LocalDateTime startDateTime, @NotNull LocalDateTime endDateTime,
                  @NotEmpty String trainerId, @NotEmpty String coTrainerId, @NotEmpty List<String> associateIds,
