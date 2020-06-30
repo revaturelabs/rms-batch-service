@@ -13,20 +13,23 @@ import java.util.Objects;
 
 @Document
 @JsonPropertyOrder({
-        "id",
-        "name",
-        "curriculum",
-        "startDateTime",
-        "endDateTime",
-        "trainerId",
-        "coTrainerId",
-        "associateIds",
-        "metadata"
+    "id",
+    "name",
+    "trainingTrackId",
+    "startDateTime",
+    "endDateTime",
+    "trainerId",
+    "coTrainerId",
+    "associateIds",
+    "metadata"
 })
 public class Batch extends Resource {
 
     @NotEmpty
     private String name;
+
+    @NotEmpty
+    private String trainingTrackId;
 
     @NotNull
     private LocalDateTime startDateTime;
@@ -43,36 +46,33 @@ public class Batch extends Resource {
     @NotEmpty
     private List<String> associateIds;
 
-    @NotNull
-    private Curriculum curriculum;
-
     public Batch() {
         super();
     }
 
     public Batch(@NotEmpty String name, @NotNull LocalDateTime startDateTime, @NotNull LocalDateTime endDateTime,
                  @NotEmpty String trainerId, @NotEmpty String coTrainerId, @NotEmpty List<String> associateIds,
-                 @NotNull Curriculum curriculum) {
+                 @NotEmpty String trainingTrackId) {
         this.name = name;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
         this.trainerId = trainerId;
         this.coTrainerId = coTrainerId;
         this.associateIds = associateIds;
-        this.curriculum = curriculum;
+        this.trainingTrackId = trainingTrackId;
     }
 
     public Batch(@NotEmpty String name, @NotNull LocalDateTime startDateTime, @NotNull LocalDateTime endDateTime,
                  @NotEmpty String trainerId, @NotEmpty String coTrainerId, @NotEmpty List<String> associateIds,
-                 @NotNull Curriculum curriculum, @NotNull ResourceMetadata metadata) {
-        this(name, startDateTime, endDateTime, trainerId, coTrainerId, associateIds, curriculum);
+                 @NotEmpty String trainingTrackId, @NotNull ResourceMetadata metadata) {
+        this(name, startDateTime, endDateTime, trainerId, coTrainerId, associateIds, trainingTrackId);
         this.metadata = metadata;
     }
 
     public Batch(String id, @NotEmpty String name, @NotNull LocalDateTime startDateTime, @NotNull LocalDateTime endDateTime,
                  @NotEmpty String trainerId, @NotEmpty String coTrainerId, @NotEmpty List<String> associateIds,
-                 @NotNull Curriculum curriculum, @NotNull ResourceMetadata metadata) {
-        this(name, startDateTime, endDateTime, trainerId, coTrainerId, associateIds, curriculum, metadata);
+                 @NotEmpty String trainingTrackId, @NotNull ResourceMetadata metadata) {
+        this(name, startDateTime, endDateTime, trainerId, coTrainerId, associateIds, trainingTrackId, metadata);
         this.id = id;
     }
 
@@ -130,12 +130,12 @@ public class Batch extends Resource {
         return this;
     }
 
-    public Curriculum getCurriculum() {
-        return curriculum;
+    public String getTrainingTrackId() {
+        return trainingTrackId;
     }
 
-    public Batch setCurriculum(Curriculum curriculum) {
-        this.curriculum = curriculum;
+    public Batch setTrainingTrackId(String trainingTrackId) {
+        this.trainingTrackId = trainingTrackId;
         return this;
     }
 
@@ -150,12 +150,12 @@ public class Batch extends Resource {
                 Objects.equals(trainerId, batch.trainerId) &&
                 Objects.equals(coTrainerId, batch.coTrainerId) &&
                 Objects.equals(associateIds, batch.associateIds) &&
-                curriculum == batch.curriculum;
+                trainingTrackId == batch.trainingTrackId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, startDateTime, endDateTime, trainerId, coTrainerId, associateIds, curriculum);
+        return Objects.hash(name, startDateTime, endDateTime, trainerId, coTrainerId, associateIds, trainingTrackId);
     }
 
     @Override
@@ -167,7 +167,7 @@ public class Batch extends Resource {
                 ", trainerId='" + trainerId + '\'' +
                 ", coTrainerId='" + coTrainerId + '\'' +
                 ", associateIds=" + associateIds +
-                ", curriculum=" + curriculum +
+                ", trainingTrack=" + trainingTrackId +
                 '}';
     }
 
